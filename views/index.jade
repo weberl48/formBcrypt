@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  h1= title
+  
+  p #{error}
+  p #{welcome} #{email}
+  h2 Sign Up
+  form(action="/signup" method="post")
+    label(for="email") Email: 
+    input(type="email" name="email")
+    p
+      label(for="password") Password: 
+      input(type="password" name="password")
+    p
+      label(for="confirm") Confirm: 
+      input(type="password" name="confirm")
+    p
+      input(type="submit" name="submit" value="submit")
+  h2 Login    
+  form(action="/login" method="post")
+    label(for="email") Email: 
+    input(type="email" name="emailIn")
+    p
+    label(for="password") Password: 
+    input(type="password" name="passwordIn")
+    p
+    input(type="submit" name="submit" value="submit")
