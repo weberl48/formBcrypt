@@ -28,23 +28,14 @@ router.post("/signup", function(req, res, next) {
 });
 router.post('/login', function(req, res, next) {
     var password = req.body.passwordIn;
-    // var hashIn = bcrypt.hashSync(password, 8);
-  var hashIn =  '$2a$08$E.PVAnuiIQKgOfHU792nUOMvQe7RyLvyi9wlk4l/EBBbeOHxZ.nXu';
+      passwordCollection.findOne({email:req.body.emailIn }, function(err, record){
+      if (!record) {res.render("index" , {error:"Email Not Found"});}
+        else if (bcrypt.compareSync(password, record.password) ) {
+     res.render('index', {welcome:"Welcome " + record.email});
+   }
 
 
-    passwordCollection.findOne({email:req.body.emailIn, password:hashIn }, function(err, record){
-          console.log(record.password);
-          console.log("###########");
-          console.log(hashIn);
-
-     if (record.password === hashIn) {
-
-  res.render('index', {welcome:"Welcome " + record.email});
-
-  }
 });
-
-
 });
 
 
